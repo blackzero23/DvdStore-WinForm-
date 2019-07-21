@@ -15,9 +15,9 @@ namespace DvdStore
     public partial class Rental
     {
         public int RentalId { get; set; }
-        public int CustomerId { get; set; }
+        public int CusId { get; set; }
         public int DvdId { get; set; }
-        public System.DateTime RentalDate { get; set; }
+        public System.DateTime RentDate { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Dvd Dvd { get; set; }

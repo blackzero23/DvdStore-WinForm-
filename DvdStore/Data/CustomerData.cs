@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DvdStore.Data
 {
-    class CustomerData
+    public class CustomerData
     {
     }
 }

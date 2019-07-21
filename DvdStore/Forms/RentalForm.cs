@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DvdStore
+namespace DvdStore.Forms
 {
-    public partial class Main : Form
+    public partial class RentalForm : Form
     {
-        public Main()
+        public RentalForm()
         {
             InitializeComponent();
         }

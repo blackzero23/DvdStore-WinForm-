@@ -15,7 +15,7 @@ namespace DvdStore.Data
     {
         public List<S> Select<S>(Expression<Func<T, S>> selector)
         {
-            using (var context = new DvdStoreEntities())
+            using (DvdStoreEntities context = new DvdStoreEntities())
             {
                 return context.Set<T>().Select(selector).ToList();
             }

@@ -7,11 +7,11 @@
       <Schema Namespace="DvdStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="CustomerId" />
+            <PropertyRef Name="CusId" />
           </Key>
-          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CusId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNum" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Dvd">
           <Key>
@@ -20,26 +20,26 @@
           <Property Name="DvdId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Genre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RantalState" Type="bit" Nullable="false" />
+          <Property Name="RentState" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Rental">
           <Key>
             <PropertyRef Name="RentalId" />
           </Key>
           <Property Name="RentalId" Type="int" Nullable="false" />
-          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CusId" Type="int" Nullable="false" />
           <Property Name="DvdId" Type="int" Nullable="false" />
-          <Property Name="RentalDate" Type="date" Nullable="false" />
+          <Property Name="RentDate" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="FK_Rental_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
-              <PropertyRef Name="CustomerId" />
+              <PropertyRef Name="CusId" />
             </Principal>
             <Dependent Role="Rental">
-              <PropertyRef Name="CustomerId" />
+              <PropertyRef Name="CusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -51,7 +51,7 @@
               <PropertyRef Name="DvdId" />
             </Principal>
             <Dependent Role="Rental">
-              <PropertyRef Name="DvdId" />
+              <PropertyRef Name="CusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -75,11 +75,11 @@
       <Schema Namespace="DvdStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="CustomerId" />
+            <PropertyRef Name="CusId" />
           </Key>
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CusId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Rentals" Relationship="Self.FK_Rental_Customer" FromRole="Customer" ToRole="Rental" />
         </EntityType>
         <EntityType Name="Dvd">
@@ -89,7 +89,7 @@
           <Property Name="DvdId" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="RantalState" Type="Boolean" Nullable="false" />
+          <Property Name="RentState" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Rentals" Relationship="Self.FK_Rental_Dvd" FromRole="Dvd" ToRole="Rental" />
         </EntityType>
         <EntityType Name="Rental">
@@ -97,9 +97,9 @@
             <PropertyRef Name="RentalId" />
           </Key>
           <Property Name="RentalId" Type="Int32" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CusId" Type="Int32" Nullable="false" />
           <Property Name="DvdId" Type="Int32" Nullable="false" />
-          <Property Name="RentalDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RentDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Rental_Customer" FromRole="Rental" ToRole="Customer" />
           <NavigationProperty Name="Dvd" Relationship="Self.FK_Rental_Dvd" FromRole="Rental" ToRole="Dvd" />
         </EntityType>
@@ -108,10 +108,10 @@
           <End Role="Rental" Type="Self.Rental" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
-              <PropertyRef Name="CustomerId" />
+              <PropertyRef Name="CusId" />
             </Principal>
             <Dependent Role="Rental">
-              <PropertyRef Name="CustomerId" />
+              <PropertyRef Name="CusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -123,7 +123,7 @@
               <PropertyRef Name="DvdId" />
             </Principal>
             <Dependent Role="Rental">
-              <PropertyRef Name="DvdId" />
+              <PropertyRef Name="CusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -149,9 +149,9 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DvdStoreModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CusId" ColumnName="CusId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -161,7 +161,7 @@
                 <ScalarProperty Name="DvdId" ColumnName="DvdId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Genre" ColumnName="Genre" />
-                <ScalarProperty Name="RantalState" ColumnName="RantalState" />
+                <ScalarProperty Name="RentState" ColumnName="RentState" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -169,9 +169,9 @@
             <EntityTypeMapping TypeName="DvdStoreModel.Rental">
               <MappingFragment StoreEntitySet="Rental">
                 <ScalarProperty Name="RentalId" ColumnName="RentalId" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CusId" ColumnName="CusId" />
                 <ScalarProperty Name="DvdId" ColumnName="DvdId" />
-                <ScalarProperty Name="RentalDate" ColumnName="RentalDate" />
+                <ScalarProperty Name="RentDate" ColumnName="RentDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
